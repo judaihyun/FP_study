@@ -10,30 +10,36 @@ let users = [
 	{ id:7, name: 'HI', age: 24},
 ];
 
-var temp_users = [];
-for(let i = 0, len = users.length; i < len; i++){
-	if(users[i].age < 30) temp_users.push(users[i]);
+
+
+console.log(log_length(
+	map(
+	filter(users, function(user){ return user.age < 30; }),
+	function(user){ return user.age; })));
+
+
+console.log(log_length(
+	map(
+	filter(users, function(user){ return user.age >= 30;}), 
+	function(user){ return user.name; })));
+
+function log_length(value){
+	console.log(value.length);
+	return value;
 }
 
-console.log(temp_users.length);
-
-let ages = [];
-for(let i = 0, len = temp_users.length; i < len; i++){
-	ages.push(temp_users[i].age);
+function filter(list, predicate){
+	let new_list = [];
+	for(let i = 0, len = list.length; i < len; i++){
+		if(predicate(list[i])) new_list.push(list[i]);
+	}
+	return new_list;
 }
 
-console.log(ages);
-
-var temp_users = [];
-for(let i = 0, len = users.length; i < len; i++){
-	if(users[i].age >= 30) temp_users.push(users[i]);
+function map(list, iteratee){
+	var new_list = [];
+	for(var i = 0, len = list.length; i < len; i++){
+		new_list.push(iteratee(list[i]));
+	}
+	return new_list;
 }
-
-console.log(temp_users.length);
-
-var names = [];
-for(let i = 0, len = temp_users.length; i < len; i++){
-	names.push(temp_users[i].name);
-}
-
-console.log(names);
